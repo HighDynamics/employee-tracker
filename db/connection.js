@@ -1,12 +1,12 @@
-const mysql = require('mysql2');
+const mysql = require('mysql2/promise');
 
 // connect to database
-const db = mysql.createConnection(
+const db = mysql.createPool(
   {
     host: 'localhost',
     user: 'root',
     password: 'password',
-    database: 'election',
+    database: 'employee_tracker',
   },
   console.log('Connected to the employee-tracker database.')
 );
