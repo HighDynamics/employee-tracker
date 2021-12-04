@@ -1,7 +1,7 @@
 const db = require('../../db/connection');
 const router = require('express').Router();
 
-// GET all roles (job title, role id, department, salary)
+// GET all roles (role id, job title, salary, department)
 router.get('/roles', (req, res) => {
   const sql = `SELECT r.id, r.title, r.salary, departments.name
               AS department

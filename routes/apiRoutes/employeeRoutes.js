@@ -14,7 +14,8 @@ router.get('/employees', (req, res) => {
               LEFT JOIN departments
               ON roles.department_id = departments.id
               LEFT JOIN employees m
-              ON e.manager_id = m.id`;
+              ON e.manager_id = m.id
+              ORDER BY departments.name`;
 
   db.query(sql)
     .then(([rows]) => {
@@ -28,4 +29,5 @@ router.get('/employees', (req, res) => {
     });
 });
 
+// TODO: add managers route (id, first name, last name, department)
 module.exports = router;
