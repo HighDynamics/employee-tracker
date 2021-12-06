@@ -32,11 +32,11 @@ class Store {
 
   async getAllRoles() {
     const sql = `SELECT r.id, r.title, r.salary, departments.name
-    AS department
-    FROM roles r
-    LEFT JOIN departments
-    ON r.department_id = departments.id
-    `;
+                AS department
+                FROM roles r
+                LEFT JOIN departments
+                ON r.department_id = departments.id
+                `;
 
     const data = await db
       .query(sql)
@@ -69,18 +69,18 @@ class Store {
 
   async getAllEmployees() {
     const sql = `SELECT e.id, e.first_name, e.last_name, 
-    roles.title AS job_title, 
-    departments.name AS department, 
-    roles.salary AS salary,
-    CONCAT(m.last_name, ', ', m.first_name) AS manager
-    FROM employees e
-    LEFT JOIN roles
-    ON e.role_id = roles.id
-    LEFT JOIN departments
-    ON roles.department_id = departments.id
-    LEFT JOIN employees m
-    ON e.manager_id = m.id
-    ORDER BY departments.name`;
+                roles.title AS job_title, 
+                departments.name AS department, 
+                roles.salary AS salary,
+                CONCAT(m.last_name, ', ', m.first_name) AS manager
+                FROM employees e
+                LEFT JOIN roles
+                ON e.role_id = roles.id
+                LEFT JOIN departments
+                ON roles.department_id = departments.id
+                LEFT JOIN employees m
+                ON e.manager_id = m.id
+                ORDER BY departments.name`;
 
     const data = await db
       .query(sql)
@@ -138,8 +138,10 @@ class Store {
       manager_id = null;
     }
 
-    const sql = `INSERT INTO employees (first_name, last_name, role_id, manager_id)
-    VALUES (?,?,?,?)`;
+    const sql = `
+    INSERT INTO employees (first_name, last_name, role_id, manager_id)
+    VALUES (?,?,?,?)
+    `;
 
     const params = [first_name, last_name, role_id, manager_id];
 
