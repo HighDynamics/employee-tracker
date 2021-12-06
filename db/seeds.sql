@@ -21,4 +21,7 @@ VALUES
   ('Maggie', 'Sipella', 5, 2),
   ('Chris', 'Rotran', 5, 2),
   ('Jordan', 'Zelle', 4, 1),
-  ('Silvia', 'Orta', 6, 3);
+  ('Silvia', 'Orta', 6, 3),
+  ('Arn', 'Hachem', 5, 2),
+  ('Zach', 'Asalam', 6, 3),
+  ('Tina', 'Wright', 4, 1);
