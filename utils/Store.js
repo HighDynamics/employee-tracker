@@ -16,13 +16,53 @@ class Store {
     return data;
   }
 
+  async getDepartmentBudgets() {
+    const sql = `
+                SELECT d.id, d.name, 
+                SUM(inner_query.salary * inner_query.employee_count) as budget
+                FROM departments d
+                LEFT JOIN
+                (
+                SELECT r.id, r.salary, r.department_id, 
+                COUNT(*) as employee_count
+                FROM roles r
+                JOIN employees e ON r.id = e.role_id
+                GROUP BY e.role_id
+                ) inner_query
+                ON d.id = inner_query.department_id
+                GROUP BY d.id
+                `;
+
+    const data = await db
+      .query(sql)
+      .then(([rows]) => rows)
+      .catch((err) => {
+        throw err;
+      });
+
+    return data;
+  }
+
   async addDepartment(department) {
     const sql = `INSERT INTO departments (name)
                 VALUES (?)`;
 
-    const data = db
+    const data = await db
       .query(sql, department)
       .then(([rows]) => rows)
+      .catch((err) => {
+        throw err;
+      });
+
+    return data;
+  }
+
+  async deleteDepartment(departmentId) {
+    const sql = `DELETE FROM departments WHERE id = ?`;
+
+    const data = await db
+      .query(sql, departmentId)
+      .then((response) => response)
       .catch((err) => {
         throw err;
       });
@@ -60,6 +100,19 @@ class Store {
       .then(([rows]) => {
         return rows;
       })
+      .catch((err) => {
+        throw err;
+      });
+
+    return data;
+  }
+
+  async deleteRole(roleId) {
+    const sql = `DELETE FROM roles WHERE id = ?`;
+
+    const data = await db
+      .query(sql, roleId)
+      .then((response) => response)
       .catch((err) => {
         throw err;
       });
@@ -150,6 +203,19 @@ class Store {
       .then(([rows]) => {
         return rows;
       })
+      .catch((err) => {
+        throw err;
+      });
+
+    return data;
+  }
+
+  async deleteEmployee(employeeId) {
+    const sql = `DELETE FROM employees WHERE id = ?`;
+
+    const data = await db
+      .query(sql, employeeId)
+      .then((response) => response)
       .catch((err) => {
         throw err;
       });
