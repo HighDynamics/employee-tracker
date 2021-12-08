@@ -2,21 +2,6 @@ const db = require('../db/connection');
 
 class Store {
   async getAllDepartments() {
-    const sql = `SELECT * FROM departments`;
-
-    const data = await db
-      .query(sql)
-      .then(([rows]) => {
-        return rows;
-      })
-      .catch((err) => {
-        throw err;
-      });
-
-    return data;
-  }
-
-  async getDepartmentBudgets() {
     const sql = `
                 SELECT d.id, d.name, 
                 SUM(inner_query.salary * inner_query.employee_count) as budget
