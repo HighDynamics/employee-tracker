@@ -43,6 +43,8 @@ SQL statement:
 
 `node index.js` to run from the command line. Follow the prompts to interact with the database.
 
+Walkthrough video: [Employee-Tracker Walkthrough](https://drive.google.com/file/d/10IUVRW9Gv0N-HvKzap3UentKTJfYuCOh/view?usp=sharing)
+
 ## Questions
 
 GitHub profile: [HighDynamics](https://github.com/HighDynamics)  
